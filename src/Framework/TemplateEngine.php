@@ -6,8 +6,14 @@ namespace Framework;
 
 class TemplateEngine
 {
-    public function home()
+    public function __construct(private string $basePath)
     {
-        echo 'home page';
+    }
+
+    public function render(string $template, array $data = [])
+    {
+        extract($data, EXTR_SKIP);
+
+        include "{$this->basePath}/{$template}";
     }
 }
